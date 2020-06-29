@@ -1,23 +1,28 @@
-package com.example.ruanjiangongcheng;
+package com.example.ruanjiangongcheng.UI;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.ruanjiangongcheng.Misc.BasicData;
+import com.example.ruanjiangongcheng.Misc.Card;
+import com.example.ruanjiangongcheng.Misc.CardAdapter;
+import com.example.ruanjiangongcheng.Misc.InternetActions;
+import com.example.ruanjiangongcheng.R;
+import com.example.ruanjiangongcheng.Misc.Tools;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import Services.Deck;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,15 +37,28 @@ public class MainActivity extends AppCompatActivity {
         }
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        BitmapDrawable[][] pokers=Tools.initDrawables(this);
+        BitmapDrawable[][] pokers= Tools.initDrawables(this);
         findViewById(R.id.imageView).setBackground(pokers[0][0]);
+        Card.setFace(pokers);
         Button button=findViewById(R.id.button);
         button.setOnClickListener((v)->{
             BasicData b= (BasicData) getApplication();
-            List<String> tmp=InternetActions.LogIn();
+            List<String> tmp= InternetActions.LogIn();
             b.setUser_id(tmp.get(1));
+            findViewById(R.id.hand);
         });
-
+        List<Card> lists=new ArrayList<>();
+        RecyclerView recyclerView =  findViewById(R.id.hand);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        recyclerView.setLayoutManager(layoutManager);
+        CardAdapter adapter = new CardAdapter(lists);
+        recyclerView.setAdapter(adapter);
+        lists.add(new Card(Deck.红桃7));
+        lists.add(new Card(Deck.大王));
+        lists.add(new Card(Deck.大王));
+        lists.add(new Card(Deck.大王));
+        lists.add(new Card(Deck.大王));
     }
 
     @Override

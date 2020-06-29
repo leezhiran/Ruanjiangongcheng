@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".MainActivity"
+    tools:context=".UI.MainActivity"
     tools:showIn="@layout/activity_main">
 
     <TextView
@@ -20,10 +20,11 @@
         app:layout_constraintVertical_bias="0.286" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="189dp"
-        android:layout_height="677dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
+        android:id="@+id/hand"
+        android:layout_width="395dp"
+        android:layout_height="183dp"
+        android:layout_marginTop="484dp"
+        android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,7 +44,37 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="262dp"
         android:layout_marginTop="226dp"
-        android:text="Button"
+        android:text="login"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="260dp"
+        android:layout_marginTop="297dp"
+        android:text="create"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/join"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="260dp"
+        android:layout_marginTop="364dp"
+        android:text="join"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/chatroom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="263dp"
+        android:layout_marginTop="437dp"
+        android:text="ChatRoom"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

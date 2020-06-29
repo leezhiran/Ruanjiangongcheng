@@ -1,4 +1,4 @@
-package com.example.ruanjiangongcheng;
+package com.example.ruanjiangongcheng.Misc;
 
 import android.app.AppComponentFactory;
 import android.graphics.Bitmap;
@@ -7,14 +7,16 @@ import android.graphics.drawable.BitmapDrawable;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ruanjiangongcheng.R;
+
 public class Tools {
     public static BitmapDrawable[][] initDrawables(AppCompatActivity context){
         Bitmap pokerOriginal= BitmapFactory.decodeResource(
-                context.getResources(),R.drawable.poker
+                context.getResources(), R.drawable.poker
         );
         int curx=0,cury=1;
-        BitmapDrawable[][] pokers=new BitmapDrawable[3][14];
-        for(int i=0;i<3;i++){
+        BitmapDrawable[][] pokers=new BitmapDrawable[4][14];
+        for(int i=0;i<4;i++){
             for(int j=0;j<14;j++){
                 pokers[i][j]=new BitmapDrawable(Bitmap.createBitmap(pokerOriginal,curx,cury,130,180));
                 curx=Math.min(curx+139,pokerOriginal.getWidth()-139);
