@@ -1,5 +1,8 @@
 package com.example.ruanjiangongcheng;
 
+import android.os.AsyncTask;
+import android.text.PrecomputedText;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -17,7 +20,10 @@ import java.util.function.Consumer;
  * Implements internet connections with the sever.
  * */
 public class InternetInterface {
-    private final String addr="http://localhost:8080/DealCards/";
+    private final String addr="http://10.0.2.2:8080/DealCards/";
+    private boolean ready=false;
+    private Map<String,String> args;
+    private String target;
     private List<String> ret;
     private HttpURLConnection connection=null;
     /**Default constructor of InternetInterface
@@ -26,28 +32,11 @@ public class InternetInterface {
      * @param target The server you want to make connection with.
      * @param args A list of internet arguments.First indicates key,second indicates value
      * */
-    public InternetInterface(Map<String,String> args,String target){
-        Thread r=new Thread(()->{
-            try {
-                HttpURLConnection c = (HttpURLConnection) new URL(addr + target).openConnection();
-                c.setConnectTimeout(5000);
-                c.setDoOutput(true);
-                c.setDoInput(true);
-                c.setRequestMethod("POST");
-                c.setUseCaches(false);
-                c.connect();
-                connection = c;
-                ret = doAction(args, target);
-            }catch (ProtocolException e) {
-                e.printStackTrace();
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-
+    public InternetInterface(Map<String, String> args, String target) {
+        this.args = args;
+        this.target = target;
     }
+
     /**
      *Do actions on certain server.
      * @param args A list of internet arguments.First indicates key,second indicates value
@@ -83,6 +72,44 @@ public class InternetInterface {
         return ret1;
     }
     public List<String> getRet() {
+        AsyncTask<Void,Void,List<String> > asyncTask=new AsyncTask<Void,Void,List<String> >() {
+            @Override
+            protected List<String> doInBackground(Void... p) {
+                try {
+                    HttpURLConnection c = (HttpURLConnection) new URL(addr + target).openConnection();
+                    c.setConnectTimeout(5000);
+                    c.setDoOutput(true);
+                    c.setDoInput(true);
+                    c.setRequestMethod("POST");
+                    c.setUseCaches(false);
+                    c.connect();
+                    connection = c;
+                    ret=doAction(args, target);
+                    ready=true;
+                    return ret;
+                } catch (ProtocolException e) {
+                    e.printStackTrace();
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return new ArrayList<String>();
+            }
+            @Override
+            protected void onPostExecute(List<String> s){
+                ret=s;
+                ready=true;
+            }
+        };
+        asyncTask.execute();
+        while(ready!=true){
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         return ret;
     }
 

@@ -15,6 +15,9 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,23 +25,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        try {
+            Class.forName("android.os.AsyncTask");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Bitmap pokerOriginal= BitmapFactory.decodeResource(
-                this.getResources(),R.drawable.poker
-        );
-        int curx=0,cury=1;
-        BitmapDrawable[][] pokers=new BitmapDrawable[3][14];
-        for(int i=0;i<3;i++){
-            for(int j=0;j<14;j++){
-                pokers[i][j]=new BitmapDrawable(Bitmap.createBitmap(pokerOriginal,curx,cury,130,180));
-                curx=Math.min(curx+139,pokerOriginal.getWidth()-139);
-            }
-            curx=0;
-            cury=Math.min(cury+195,pokerOriginal.getHeight()-190);
-        }
+        BitmapDrawable[][] pokers=Tools.initDrawables(this);
         findViewById(R.id.imageView).setBackground(pokers[0][0]);
-        FloatingActionButton fab = findViewById(R.id.fab);
+        Button button=findViewById(R.id.button);
+        button.setOnClickListener((v)->{
+            BasicData b= (BasicData) getApplication();
+            List<String> tmp=InternetActions.LogIn();
+            b.setUser_id(tmp.get(1));
+        });
+
     }
 
     @Override
