@@ -13,8 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
-
+        <activity
+            android:name=".UI.StartmatchActivity"
+            android:label="@string/title_activity_startmatch"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".UI.JoinActivity"
             android:label="@string/title_activity_join"

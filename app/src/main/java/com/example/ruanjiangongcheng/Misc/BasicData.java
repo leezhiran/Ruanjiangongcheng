@@ -6,6 +6,15 @@ public class BasicData extends Application {
     private String User_id;
     private String Match_id;
 
+    public void setDealt(boolean dealt) {
+        this.dealt = dealt;
+    }
+
+    public boolean isDealt() {
+        return dealt;
+    }
+
+    private boolean dealt=false;
     public String getUser_id() {
         return User_id;
     }

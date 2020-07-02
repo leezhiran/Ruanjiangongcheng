@@ -9,6 +9,16 @@
     tools:showIn="@layout/activity_main">
 
     <TextView
+        android:id="@+id/room"
+        android:layout_width="218dp"
+        android:layout_height="187dp"
+        android:text=""
+        android:background="@drawable/shape"
+        android:singleLine="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"

@@ -9,7 +9,7 @@
     tools:showIn="@layout/activity_join">
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/join"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="292dp"
@@ -29,20 +29,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <TextView
         android:id="@+id/listMatch"
-        android:layout_width="379dp"
-        android:layout_height="515dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="100dp"
+        android:layout_width="350dp"
+        android:layout_height="543dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="105dp"
         android:background="@drawable/shape"
+        android:singleLine="false"
         android:ems="10"
-        android:enabled="true"
-        android:gravity="top"
-        android:inputType="textPersonName"
-        android:maxLines="10"
-        android:minLines="8"
-        android:scrollbars="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

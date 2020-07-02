@@ -3,6 +3,8 @@ package com.example.ruanjiangongcheng.Misc;
 import android.os.AsyncTask;
 import android.text.PrecomputedText;
 
+import com.example.ruanjiangongcheng.Exception.ConnectionFailed;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -71,7 +73,7 @@ public class InternetInterface {
         args.clear();
         return ret1;
     }
-    public List<String> getRet() {
+    public List<String> getRet() throws ConnectionFailed {
         AsyncTask<Void,Void,List<String> > asyncTask=new AsyncTask<Void,Void,List<String> >() {
             @Override
             protected List<String> doInBackground(Void... p) {
@@ -107,8 +109,13 @@ public class InternetInterface {
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                List<String> l=new ArrayList<>();
+                l.add("Interrupted");
+                Thread.currentThread().interrupt();
             }
+        }
+        if(ret.size()==0){
+            throw new ConnectionFailed();
         }
         return ret;
     }
