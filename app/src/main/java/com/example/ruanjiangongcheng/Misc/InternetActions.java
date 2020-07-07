@@ -12,14 +12,21 @@ public class InternetActions {
     public static List<String> Spooling(String target,Map<String,String> input) throws ConnectionFailed {
         Map<String,String> args=new HashMap<>();
         args.put("Action","Spooling");
-        args.put("user_id",input.get("user_id"));
-        args.put("match_id",input.get("match_id"));
+        args.put("user_id",input.get("User_id"));
+        args.put("match_id",input.get("Match_id"));
         return new InternetInterface(args,target).getRet();
     }
     public static List<String> LogIn() throws ConnectionFailed {
         Map<String,String> args=new HashMap<>();
         args.put("Action","log_in");
         InternetInterface i=new InternetInterface(args,mainServer);
+        return  i.getRet();
+    }
+    public static List<String> SignInChatRoom(String id) throws ConnectionFailed {
+        Map<String,String> args=new HashMap<>();
+        args.put("Action","sign_in");
+        args.put("user_id",id);
+        InternetInterface i=new InternetInterface(args,chatRoomServer);
         return  i.getRet();
     }
     public static List<String> ListMatch() throws ConnectionFailed {
@@ -45,9 +52,10 @@ public class InternetActions {
     }
     public static List<String> broadcast(Map<String,String> input) throws ConnectionFailed {
         Map<String,String> args=new HashMap<>();
-        args.put("Action","create_match");
-        args.put("user_id",input.get("user_id"));
-        args.put("match_id",input.get("match_id"));
+        args.put("Action","Broadcast");
+        args.put("user_id",input.get("User_id"));
+        args.put("match_id",input.get("Match_id"));
+
         args.put("Content",input.get("Content"));
         return new InternetInterface(args,chatRoomServer).getRet();
     }

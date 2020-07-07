@@ -114,7 +114,7 @@ public class InternetInterface {
                 Thread.currentThread().interrupt();
             }
         }
-        if(ret.size()==0){
+        if(false){
             throw new ConnectionFailed();
         }
         return ret;

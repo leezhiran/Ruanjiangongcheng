@@ -98,6 +98,10 @@ public class MainActivity extends AppCompatActivity {
             Intent intent=new Intent(this,StartmatchActivity.class);
             startActivity(intent);
         });
+        findViewById(R.id.chatroom).setOnClickListener((view)->{
+            Intent intent=new Intent(this,ChatRoom.class);
+            startActivity(intent);
+        });
     }
 
     @Override
@@ -110,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
     public void onStop(){
         super.onStop();
         if(t!=null) {
-            t.interrupt();
+          //  t.interrupt();
         }
     }
 
@@ -130,8 +134,8 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         BasicData bd=(BasicData)getApplication();
                         Map<String,String> args=new HashMap<String,String>();
-                        args.put("user_id",bd.getUser_id());
-                        args.put("match_id",bd.getMatch_id());
+                        args.put("User_id",bd.getUser_id());
+                        args.put("Match_id",bd.getMatch_id());
                         List<String> ret=InternetActions.Spooling("AsyncServer",args);
                         msg.obj = ret.get(1);
 
